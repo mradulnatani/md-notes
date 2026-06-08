@@ -173,4 +173,160 @@ docker run -d --name mysql --network two-tier -v mysql-data:/var/lib/mysql -e MY
 ---
 
 ## Docker Compose
-Docker compose is a config file that is a yaml/yml file
+Docker compose is a config file that is a yaml/yml file.
+- key: value
+We can make multiple docker containers in a docker compose file.
+```
+version: "3.8"
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql
+    environment:
+      MYSQL_DATABASE: "devops"
+      MYSQL_ROOT_PASSWORD: "root"
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - two-tier
+    restart: always #no, unless-stopped, on-failure
+    healthcheck:
+      test: ["CMD", "mysqladmin","ping","-h","localhost","-uroot","-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+  flask:
+    build:
+      context: .
+    container_name: two-tier-backend
+    ports:
+      - "5000:5000"
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+	  MYSQL_DB: devops
+	networks:
+	  - two-tier
+	depends_on:
+	  - mysql
+volumes:
+  - mysql-data
+networks:
+  - two-tier
+
+```
+
+- version: syntax or latest version of docker compose.
+- Inside services block we mention the names of containers we want to build.
+- Flask or the other backend images are not made they are build using the context (location of the docker file).
+- depends_on: This keyword says that the container is dependent on the other container, so the other container should be made first.
+- healthcheck block: This block makes sure that the container is fully up and working, until this health check is not passed the container is not considered full up.
+- restart: Docker Compose supports four core restart policies to control how containers behave when they stop, crash, or when the system reboots. Restart policies work as per the results of the healthckecks.
+   - **`"no"`**: The default behavior. Docker will **never automatically restart** the container.
+   - **`always`**: Always restarts the container regardless of why it stopped or its exit code.
+   - **`unless-stopped`**: Similar to `always`, but respects manual intervention. If you intentionally run `docker compose stop`, the container **will not restart** automatically on system or daemon reboots.
+   - **`on-failure`**: Restarts the container **only if it exits with a non-zero exit code** (indicating an application error or crash). You can optionally specify maximum attempts using `on-failure:5`
+
+```
+docker compose up
+```
+- This command is used to build and run the docker compose file.
+```
+docker compose up -d
+```
+- This command is used to build and run docker compose in the background.
+```
+docker compose down
+```
+- Stops the docker containers made using docker compose.
+```
+docker compose up -d --build
+```
+- Forcefully pulls and builds all the docker images again.
+```
+docker system prune
+```
+- Deletes all the unused or stopped containers.
+```
+ docker attach {image_id}
+```
+- attached the containers or container logs to the screen.
+
+---
+## Docker Registry
+A centralized storage and distribution system used to manage and share Docker images.
+
+- Step 1: Docker login
+   Login to docker using the cli.
+   ```
+   docker login
+   ```
+- Step 2: Tag the image
+```  
+docker image tag {old_name_of_the_image}:{version_of_the_image}{docker_username}/{new_image_name}:{version}
+```
+   
+- Step 3: Docker push
+   Pushes the docker image to the dockerhub
+   ```
+   docker push {image_tagged_name}:{version}
+   ```
+
+- Now we do not need to build the image using the build context in the docker compose we can directly use the "image:" and give it the name of our pushed image.
+- In windows the Docker desktop holds a simulation of linux, which means that if we want to run a linux based docker image on windows we need to install docker desktop on top priority.
+
+---
+## Multi-stage Docker Builds
+"Docker image optimization"
+When we use base images like python:3.7, which are big images which turn out the container to be also big which is a concerning thing in terms of optimization as it takes more time in everything (container building, etc).
+
+
+```
+#stage 1: base image approx of 994 mb ~ 1.40 gb (total size of image)
+FROM python:3.7 AS builder
+
+WORKDIR: /app
+
+COPY requirements.txt .
+
+RUN pip install -r requirements.txt
+
+#stage 2 small base image around 400 mb
+FROM python:3.7-slim
+
+WORKDIR /app
+
+COPY --from=builder /usr/local/lib/python3.7/site-packages /usr/local/lib/python3.7/site-packages
+
+COPY . .
+ENTRYPOINT ["python","run.py"]
+```
+
+---
+## Monitoring and logging in Docker
+
+```
+docker logs {container_id}
+```
+- Used to see the logs of a particular container.
+```
+nohup docker attach {container_id} &
+```
+- nohup runs a command in the background and sends the data or logs to a file.
+- It will make a nohup.out named file which will store all the data or logs of the particular contianer.
+---
+
+## docker scout and docker init
+- Base image -> new image
+- The base image may contain some security related issues or vulnerabilities so we need to scan the image for which we use docker scout
+- docker scout is by default installed in the docker desktop but we need to use plugins to install docker scout in linux.
+- docker init is a command-line utility provided by Docker Desktop that automatically initializes and generates the necessary configuration boilerplate files to containerize your application.
+
+---
+
+---
