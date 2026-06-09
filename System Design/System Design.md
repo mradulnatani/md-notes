@@ -1,4 +1,4 @@
-![[Pasted image 20260608203909.png]]
+<img src='Pasted image 20260608203909.png'>![[Pasted image 20260608203909.png]]<img>
 
 # Introduction 
 
@@ -21,7 +21,7 @@ Often you hear in a discussion “but that doesn’t scale” as the magical wor
 
 #### 1.1 Types of Scaling
 
-![[Pasted image 20260609015523.png]]
+<img src='Pasted image 20260609015523.png'>![[Pasted image 20260609015523.png]]<img>
                    Horizontal and vertical scaling
                    
 **Horizontal scaling** and **Vertical scaling** both involve adding resources to your computing infrastructure, you must decide which is right for your application. Scaling horizontally and scaling vertically are similar in that they both involve **adding computing resources** to your infrastructure. There are distinct differences between the two in terms of implementation and performance.
@@ -87,7 +87,7 @@ Now that we know the options, how do we choose the right caching strategy? Sever
 ---
 ### 3. Load Balancing
 
-![[Pasted image 20260609121514.png]]
+<img src='Pasted image 20260609121514.png'>![[Pasted image 20260609121514.png]] <img>
 
 In the world of computers and the internet, when a website or online service becomes super popular, it starts receiving a flood of requests from users all over the place. Instead of relying on a single server to handle all these requests, load balancing spreads the workload across multiple servers.
 - No single server gets overwhelmed with too much traffic.
@@ -97,7 +97,7 @@ In the world of computers and the internet, when a website or online service bec
 
 #### 3.1 Types of Load Balancers based on the OSI Model
 
-![[Pasted image 20260609122543.png]]
+<img src='Pasted image 20260609122543.png'>![[Pasted image 20260609122543.png]]<img>
 
 - Network Load Balancer (Load Balancer 4): 
   - Operates at the Transport Layer (layer 4) of the OSI model.

@@ -1,4 +1,5 @@
-![[Pasted image 20260609121027.png]]
+<img src='Pasted image 20260609121027.png'>![[Pasted image 20260609121027.png]] <img>
+
 ## 🎯 Purpose
 
 This repository serves as:
