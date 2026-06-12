@@ -150,3 +150,30 @@ In the world of computers and the internet, when a website or online service bec
 Time to First Byte (TTFB) is the time taken by a server to send the first byte of data in response to a client’s request. It includes the time spent on processing the request, database queries, and any other backend operations before the server starts sending the response data.
 The Least Response Time load balancing algorithm implicitly takes into account the Time to First Byte as it evaluates the overall response time of each server. The response time includes the TTFB along with the time taken to transmit the complete response data.
 
+---
+
+### 3. Database Replication and Partitioning
+#### 3.1 Database Replication
+Before getting started you must know some keywords for better understanding.
+- Latency - It is the total time a system takes to process a request and return a response.
+- Availability - It is a measure of percentage of time a system is operational and accessible to users.
+- Fault tolerance - It is a system's ability to continue operating properly without interruption when a hardware, software, or network component fails.
+- Data Throughput - It is the total volume of data or number of operations a system can process, transfer, or handle successfully within a specific time unit.
+- Data Consistency - Ensures that all nodes in a distributed system see the same data at the same time, preventing conflicts during concurrent access.
+- Durability - Ensures that once data is committed, it remains intact, permanent, and recoverable, even during system crashes, power failures, or hardware outages.
+
+***What is Database Replication?***
+Database replication in simple language means to store data at one or more places or simply copying the data from one database or from one server to another.
+
+BUT WHY DO WE NEED IT????
+Let us take an example situation to understand the need in a better way.
+I am running an E-comm company and my company is a huge success in India but now i am targeting multi national costumers, so if a person from Australia comes to visit my website he or she will be able to see the products after a large amount of time which is a problem as my servers are hosted in the Indian region.
+Increasing the resources on my server is not the solution of this problem. The issue of because of network latency.So by replication, we can keep data close to the user’s geographic area to **reduce latency**. Similar things are done by **Netflix and Amazon prime video** etc that’s why you people can watch HD movies without any buffering delays.
+- Replication also solves the problems like Availability & Fault toleration issues and Data throughput issues.
+So as a CEO of an e-commerce startup, if my application goes down (Unavailable) then my whole business could get impacted and I could have lost thousands of bucks and can lose the trust of our customers which is very bad these days. Hence we need better Fault tolerance in our system.
+
+#### 3.2 Algorithms to implement Database replication
+- **Single Leader Replication**(Active-Passive or Master-Slave Replication)
+  - 
+- **Multi-Leader Replication**
+- **Leaderless Replication**
