@@ -50,6 +50,16 @@ http{
 
 # Nginx Reverse Proxy for an Application Running on localhost:8000
 
+
+> [!NOTE] 
+> -> Proxy - Machine or a set of machines which sit between two systems(user and a backend system or two backend systems, anything).
+> Proxies are used to abstract the complexities or un-trusted environment.
+> -> Forward Proxy - Abstracts out the client by acting as a middleware, protects the identity of the client. Whenever the client makes a call the call goes via this proxy to the internet or to some service or machine. The service will only know the IP address of the proxy not of the client. It can be used to restrict the access of websites, at forward proxy caching can be performed as everything is going through it. 
+> -> Reverse Proxy - The reverse proxy abstracts outs the complexities of the down stream systems. Example "load balancer", Router (an api gaateway), caching, Abstraction of the infra
+ -> Firewall - A firewall is a network security device that separates a trusted internal network from an external network deemed untrustworthy, such as the internet. It regulates incoming and outgoing network traffic based on preset security rules. Firewalls are paramount in shielding networks from unauthorized access, harmful activities, and potential threats, and can exist as hardware, software, software-as-a-service (SaaS), or public or private (virtual) cloud. 
+
+
+
 ## Objective
 
 Expose an application running on `localhost:8000` through Nginx, allowing clients to access it via port `80`.

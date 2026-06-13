@@ -147,3 +147,11 @@ spec:
 Usually we do not create pods directly using the yml file, we instead create them using the workload resources like Deployments, job, ReplicaSet, DaemonSet and StatefulSet(when we need to track the state of the pod running).
 - Each pod runs the single instance of the application, you must always run multiple pods for any appliation.
 - The replication of pods is the responsibility of the workloads and the Controllers.
+
+- Types of Multi-container pods
+  -  **Sidecar Containers**: Enhance or extend the main application         container, such as a separate log exporter or metrics collector.
+  -  **Init Containers**: Specialized containers that execute sequentially  and run to completion _before_ any app containers start. They        typically handle setup scripts, database migrations, or security   credentials.
+  - **Ephemeral Containers**: Temporary troubleshooting containers that you run interactively inside an existing Pod to diagnose bugs. They cannot be added at Pod creation and lack resource guarantees.
+
+### - Kubernetes workloads
+1. Deployment: Makes the pod scalable.
